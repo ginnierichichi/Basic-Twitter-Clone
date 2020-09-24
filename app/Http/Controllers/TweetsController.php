@@ -27,4 +27,11 @@ class TweetsController extends Controller
 
         return redirect('/tweets');
     }
+
+    public function destroy(Tweet $tweet)
+    {
+        //$this->authorize('manage', $tweet);
+        $tweet->delete();
+        return redirect('/tweets');
+    }
 }

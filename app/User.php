@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-       'username', 'avatar', 'name', 'email', 'password',
+       'username', 'avatar', 'banner', 'name', 'bio', 'email', 'password',
     ];
 
     /**
@@ -45,9 +45,24 @@ class User extends Authenticatable
         return asset('storage/' . $value ?: '/images/default-avatar.png' );
     }
 
+    public function getBannerAttribute($value)
+    {
+        return asset('storage/' . $value ?: '/images/default-profile-banner.png' );
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function bio()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function addBio()
+    {
+        return $this->path()->create(compact('body'));
     }
 
 

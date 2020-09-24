@@ -21,8 +21,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/tweets', 'TweetsController@index')->name('home');
     Route::post('/tweets', 'TweetsController@store');
 
+    Route::delete('/tweets/{tweet}', 'TweetsController@destroy');
+
+
     Route::post('/tweets/{tweet}/like', 'TweetLikesController@store');
+
     Route::delete('/tweets/{tweet}/like', 'TweetLikesController@destroy');
+
+//    Route::post('/tweet/{tweet}/like', 'TweetLikesController@storeLike')->name('tweet.like');
+//    Route::post('/tweet/{tweet}/dislike', 'TweetLikesController@storeDislike')->name('tweet.dislike');
+//
+//    Route::delete('/tweet/{tweet}/like', 'TweetLikesController@destroyLike');
+//    Route::delete('/tweet/{tweet}/dislike', 'TweetLikesController@destroyLike');
+
 
     Route::post(
         '/profiles/{user:username}/follow',
@@ -38,6 +49,8 @@ Route::middleware('auth')->group(function () {
         '/profiles/{user:username}',
         'ProfilesController@update'
     )->middleware('can:edit,user');
+
+    Route::post('/profiles/{user}/bio', 'ProfilesController@store');
 
     Route::get('/explore', 'ExploreController');
 });

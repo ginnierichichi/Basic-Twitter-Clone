@@ -8,6 +8,7 @@
        </a>
     </div>
 
+
     <div>
         <h5 class="font-bold mb-4">
             <a href="{{ route('profile', $tweet->user) }}">
@@ -17,4 +18,16 @@
         <p class="text-sm mb-3">{{ $tweet->body }}</p>
          <x-like-buttons :tweet="$tweet" />
     </div>
+
+    <footer>
+        <form method="POST" action="/tweets/{{ $tweet->id }}" class="text-right">
+            @csrf
+            @method('DELETE')
+
+            <div class="ml-5 border border-dark">
+                <button type="submit" class="text-xs">Delete</button>
+            </div>
+        </form>
+
+    </footer>
 </div>
